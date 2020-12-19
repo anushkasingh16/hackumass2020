@@ -9,6 +9,13 @@ import firebaseConfig from './config.js';
 firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
+function helper(snapshot) {
+//  let key = snapshot.key; // null
+//  let  childKey = snapshot.child("users/ada").key; // "ada"
+};
+var ref = firebase.database().ref();
+ref.once("value").then(helper);
+
 function App() {
   return (
     <Router>
@@ -43,7 +50,8 @@ function Home() {
                     </ul>
                 </div>
             </div>
-            <div className="trending"> < a href="/donate">trending</a>
+            <div className="trending"> 
+              < a href="/donate">trending</a>
             </div>
             
     </div>
