@@ -98,9 +98,12 @@ a{
 
 /* Hide the images by default */
 .mySlides {
-  display: none;
+  display: inline-block;
 }
-
+img{
+  width: 30%;
+  height: 40%;
+}
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;

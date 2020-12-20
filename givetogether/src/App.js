@@ -35,38 +35,39 @@ function App() {
   );
 }
 function Home(){
-  function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  console.log(slides.length);
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
   
-  if(slides.length !== 0){
+//   function showSlides(n) {
+//   var i;
+//   var slides = document.getElementsByClassName("mySlides");
+//   console.log(slides.length);
+//   var dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//       slides[i].style.display = "none";
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//       dots[i].className = dots[i].className.replace(" active", "");
+//   }
+  
+//   if(slides.length !== 0){
     
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  }
-}
-var slideIndex = 1;
-showSlides(slideIndex);
+//   slides[slideIndex-1].style.display = "block";
+//   dots[slideIndex-1].className += " active";
+//   }
+// }
+// var slideIndex = 1;
+// showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-showSlides(slideIndex += n);
-}
+// // Next/previous controls
+// function plusSlides(n) {
+// showSlides(slideIndex += n);
+// }
 
-// Thumbnail image controls
-function currentSlide(n) {
-showSlides(slideIndex = n);
-}
+// // Thumbnail image controls
+// function currentSlide(n) {
+// showSlides(slideIndex = n);
+// }
      
   return (
     <div>
@@ -90,7 +91,7 @@ showSlides(slideIndex = n);
  
 
             <h1 >TRENDING</h1>
-            <div className="slideshow-container">
+            {/* <div className="slideshow-container">
               <div className="mySlides">
                 <div className="numbertext">1 / 3</div>
                 <img src={khanacademy} ></img>
@@ -114,6 +115,21 @@ showSlides(slideIndex = n);
            <span className="dot" onclick={currentSlide(1)}></span>
            <span className="dot" onclick={currentSlide(2)}></span>
            <span className="dot" onclick={currentSlide(3)}></span>
+           </div> */}
+           <div className="slideshow-container">
+            <div className="mySlides">
+            <img src={khanacademy} ></img>
+            <h3>Recommended Donations: $1/$2/$4/$6</h3>
+
+            </div>
+            <div className="mySlides">
+            <img src={rainforest} ></img>
+            <h3>Recommended Donations: $1.92 </h3>
+            </div>
+            <div className="mySlides">
+            <img src={feedingamerica} ></img>
+            <h3>Recommended Donations: $1 CA</h3>
+            </div>
            </div>
             <button className="donateButton" onClick={event =>  window.location.href='/donate'} >DONATE</button>
           </div>
