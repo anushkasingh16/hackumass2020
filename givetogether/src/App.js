@@ -7,18 +7,14 @@ import {
 } from "react-router-dom";
 import firebase from 'firebase';
 import firebaseConfig from './config.js';
-// import Radium from "radium";
-// import visaIMG from "./images/visa.png";
+import PurchaseWithCreditCard from "./PurchaseBody/purchaseBody.js";
+import PurchaseWithPaypal from "./PurchaseWithPayPal/PurchaseWithPaypal.js";
+import creditCardIMG from "./images/creditCard.png";
+import PayPalIMG from "./images/PayPal.png";
+
 
 firebase.initializeApp(firebaseConfig);
-var db = firebase.database();
-
-// function helper(snapshot) {
-//  let key = snapshot.key; // null
-//  let  childKey = snapshot.child("users/ada").key; // "ada"
-// };
-// var ref = firebase.database().ref();
-// ref.once("value").then(helper);
+let database= firebase.database().ref();
 
 function App() {
   return (
@@ -41,7 +37,7 @@ function Home() {
     <div>
        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet"></link>
         <div className="header">
-            <center>MinMatch</center> 
+  <center>MiniMatch </center> 
         </div>
         <div className="mainlayout">
             <div className="categories">
@@ -76,67 +72,45 @@ function Donate() {
     if (credit_card_clicked){
       set_credit_card_button_css({marginRight: "1.5%", borderWidth: "medium", borderColor: "black"});
       set_paypal_button_css({marginLeft: "1.5%"});
-      set_purchase_body(
-        <div id = "creditCardSelect">
-          <button id = "visa">
-            visa
-          </button>
-          <button id = "masterCard">
-              MasterCard
-          </button>
-          <p>Name on the Credit Card</p>
-          <input type = "text"/>
-          <div>
-            <p>Card Numbers</p>
-            <input class = "cardNumbers" type = "text"/>
-            <input class = "cardNumbers" type = "text"/> 
-            <input class = "cardNumbers" type = "text"/> 
-            <input class = "cardNumbers" type = "text"/>
-          </div>
-          <p>Expiration Date</p>
-          <input type = "text"/>
-            <p>CVC</p>
-            <input type = "text"/>
-        </div>
-      )
+      set_purchase_body(<PurchaseWithCreditCard/>)
 
     } else{
       set_credit_card_button_css({marginRight: "1.5%"});
       set_paypal_button_css({marginLeft: "1.5%", borderWidth: "medium", borderColor: "black"});
-      set_purchase_body(
-        <div>
-          <button>PayPal Log in</button>
-        </div>
-      )
+      set_purchase_body(<PurchaseWithPaypal/>)
     }
   }
 
   return (
     <div className="App">
       <div className = "summary" style = {{paddingBottom: "3%"}}>
-        <h1 id = "intro">Complete Your Donation</h1>
+        <h1 id = "intro">Complete Tour Donation</h1>
         <p>Total Donation: [Price]</p>
-        <button 
+        <input 
+          type = "image"
+          src = {creditCardIMG}
+
           onClick = {() => {
             credit_card_clicked = true;
             toggle_purchase_option();
           }}
           style = {credit_card_button_css}
         >
-            Credit card
-        </button>
-        <button
+        </input>
+        <input
+          type = "image"
+          src = {PayPalIMG}
           onClick = {() => {
             credit_card_clicked = false;
             toggle_purchase_option();
           }} 
           style = {paypal_button_css}>
-            PayPal
-        </button>
+        </input>
       </div>
       {purchase_body}
 
     </div>
   );
 }
+
 export default App;
