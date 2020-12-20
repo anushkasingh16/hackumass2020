@@ -11,10 +11,12 @@ import PurchaseWithCreditCard from "./PurchaseBody/purchaseBody";
 import PurchaseWithPaypal from "./PurchaseWithPayPal/PurchaseWithPaypal";
 import creditCardIMG from "./images/creditCard.png";
 import PayPalIMG from "./images/PayPal.png";
-
-
+import khanacademy from './images/khanacademy.png'
+import rainforest from './images/rainforest.jpeg'
+import feedingamerica from './images/feedingamerica.png'
 firebase.initializeApp(firebaseConfig);
 let database= firebase.database().ref();
+
 
 function App() {
   return (
@@ -32,7 +34,40 @@ function App() {
     </Router>
   );
 }
-function Home() {
+function Home(){
+  function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  console.log(slides.length);
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  
+  if(slides.length !== 0){
+    
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  }
+}
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+showSlides(slideIndex = n);
+}
+     
   return (
     <div>
        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet"></link>
@@ -43,27 +78,58 @@ function Home() {
             <div className="categories">
                 <div className="list">
                     <ul>
-                        <li>Education</li>
-                        <li>Tech</li>
-                        <li>Health</li>
-                        <li>Politics</li>
+                        <li><a href="/edu">EDUCATION</a></li>
+                        <li><a href="/tech">TECH</a></li>
+                        <li><a href="/health">HEALTH</a></li>
+                        <li><a href="/pol">POLITICS</a></li>
+                        <li><a href="/others">OTHERS</a></li>
                     </ul>
                 </div>
             </div>
             <div className="trending"> 
-              < a href="/donate">trending</a>
+ 
+
+            <h1 >TRENDING</h1>
+            <div className="slideshow-container">
+              <div className="mySlides">
+                <div className="numbertext">1 / 3</div>
+                <img src={khanacademy} ></img>
+
+               </div>
+               <div className="mySlides">
+                <div className="numbertext">2 / 3</div>
+                <img src={rainforest} ></img>
+               </div>
+               <div className="mySlides">
+                <div className="numbertext">3 / 3</div>
+                <img src={feedingamerica} ></img>
+               </div>
+               <a className="prev" onclick={plusSlides(-1)}>&#10094;</a>
+               <a className="next" onclick={plusSlides(1)}>&#10095;</a>
             </div>
+
             
-    </div>
+            <br></br>
+           <div>
+           <span className="dot" onclick={currentSlide(1)}></span>
+           <span className="dot" onclick={currentSlide(2)}></span>
+           <span className="dot" onclick={currentSlide(3)}></span>
+           </div>
+            <button className="donateButton" onClick={event =>  window.location.href='/donate'} >DONATE</button>
+          </div>
+</div>
+
     <div className="footer">
-             <h2>About</h2>
+             <h2>ABOUT</h2>
+<p>MiniMatch site lets you browse and pick out an ideal non-profit or charity and contribute small (usually below $5 USD), pre-calculated amounts, then share with your friends to encourage them to donate. This lets you give back to society without breaking your bank, and leverages your social media networks for social change.
+We pool the money marked for each organization, then donate when it reaches a certain amount, allowing for individuals to donate smaller amounts than the organization allows and reducing the percentage of donations lost by a flat fee per donation.</p>
     </div>
     </div>
   );
 }
 
 function Donate() {
-  let [credit_card_clicked, set_credit_card_clicked] = useState(false);
+  var [credit_card_clicked, set_credit_card_clicked] = useState(false);
   const [purchase_body, set_purchase_body] = useState(null);
   const [credit_card_button_css, set_credit_card_button_css] = useState({marginRight: "1.5%"});
   const [paypal_button_css, set_paypal_button_css] = useState({marginLeft: "1.5%"});
@@ -84,7 +150,7 @@ function Donate() {
   return (
     <div className="App">
       <div className = "summary" style = {{paddingBottom: "3%"}}>
-        <h1 id = "intro">Complete Tour Donation</h1>
+        <h1 id = "intro">Complete Your Donation</h1>
         <p>Total Donation: [Price]</p>
         <input
           className = "paymentMethod"
