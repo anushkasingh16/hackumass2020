@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import firebase from 'firebase';
 import firebaseConfig from './config.js';
-import PurchaseWithCreditCard from "./PurchaseBody/purchaseBody.js";
-import PurchaseWithPaypal from "./PurchaseWithPayPal/PurchaseWithPaypal.js";
+import PurchaseWithCreditCard from "./PurchaseBody/purchaseBody";
+import PurchaseWithPaypal from "./PurchaseWithPayPal/PurchaseWithPaypal";
 import creditCardIMG from "./images/creditCard.png";
 import PayPalIMG from "./images/PayPal.png";
 
@@ -86,10 +86,10 @@ function Donate() {
       <div className = "summary" style = {{paddingBottom: "3%"}}>
         <h1 id = "intro">Complete Tour Donation</h1>
         <p>Total Donation: [Price]</p>
-        <input 
+        <input
+          className = "paymentMethod"
           type = "image"
           src = {creditCardIMG}
-
           onClick = {() => {
             credit_card_clicked = true;
             toggle_purchase_option();
@@ -98,6 +98,7 @@ function Donate() {
         >
         </input>
         <input
+          className = "paymentMethod"
           type = "image"
           src = {PayPalIMG}
           onClick = {() => {
